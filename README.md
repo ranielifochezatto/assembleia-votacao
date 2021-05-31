@@ -67,7 +67,7 @@ response:
 
 ---
 
-#### 3. Votar
+#### 3. Votar na pauta
 
 `POST /v1/pauta/{id da pauta}/votacao`
 
@@ -109,7 +109,7 @@ response:
 
 #### 4. Contabilização dos votos
 
-Os votos serão automaticamente computados em até 30 segundos após o encerramento da sessão. Foi desenvido um job que roda a cada 30 segundos verificando as pautas com sessões encerradas que precisam ser apuradas.
+Os votos serão automaticamente computados em até 30 segundos após o encerramento da sessão. Foi desenvolvido um job que roda a cada 30 segundos verificando as pautas com sessões encerradas que precisam ser apuradas.
 
 Para consultar a contabilizacao dos votos, deve-se consultar a pauta:
 
