@@ -45,6 +45,7 @@ public class PautaServiceImpl implements PautaService {
         }
 
         if(tempoDuracaoEmMinutos == null){
+            //caso nao seja informado a duracao, o default sera 1 minuto
             tempoDuracaoEmMinutos = 1L;
         }
 

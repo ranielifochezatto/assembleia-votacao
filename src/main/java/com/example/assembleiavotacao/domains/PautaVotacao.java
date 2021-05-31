@@ -31,7 +31,6 @@ public class PautaVotacao implements Serializable {
     @Column(name = "BL_VOTO", nullable = false)
     private Boolean voto;
 
-    @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CD_PAUTA", referencedColumnName = "CD_PAUTA", nullable = false, updatable = false)
     private Pauta pauta;
