@@ -48,6 +48,17 @@ public class PautaVotacaoServiceImpl implements PautaVotacaoService {
         return repository.save(pautaVotacao);
     }
 
+    @Override
+    public Long getNumeroVotos(Long codigoPauta, Boolean voto) {
+        log.debug("into getNumeroVotos method");
+        if(Boolean.TRUE.equals(voto)){
+            return repository.countByPautaIdAndVotoTrue(codigoPauta);
+        } else{
+            return repository.countByPautaIdAndVotoFalse(codigoPauta);
+        }
+
+    }
+
     private Boolean associadoVotouPauta(String numeroCpfAssociado, Long codigoPauta){
         log.debug("into associadoVotouPauta method");
         return repository.existsByNumeroCpfAssociadoAndPautaId(numeroCpfAssociado, codigoPauta);

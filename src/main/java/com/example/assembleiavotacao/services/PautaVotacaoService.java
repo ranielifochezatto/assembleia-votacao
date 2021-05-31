@@ -10,4 +10,6 @@ public interface PautaVotacaoService {
 
     PautaVotacao save(PautaVotacao pautaVotacao);
 
+    Long getNumeroVotos(Long codigoPauta, Boolean voto);
+
 }

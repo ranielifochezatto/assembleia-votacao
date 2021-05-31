@@ -2,6 +2,7 @@ package com.example.assembleiavotacao.services;
 
 import com.example.assembleiavotacao.domains.Pauta;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface PautaService {
@@ -11,4 +12,8 @@ public interface PautaService {
     Pauta save(Pauta pauta);
 
     Pauta abrirSessao(Long codigoPauta, Long tempoDuracaoEmMinutos);
+
+    List<Pauta> getPautasParaApurar();
+
+    void apurarPautaByIdNewTransaction(Long id);
 }
