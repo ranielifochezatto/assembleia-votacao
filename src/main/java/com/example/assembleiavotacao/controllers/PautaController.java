@@ -4,6 +4,8 @@ import com.example.assembleiavotacao.controllers.dtos.PautaDTO;
 import com.example.assembleiavotacao.controllers.mappers.PautaMapper;
 import com.example.assembleiavotacao.domains.Pauta;
 import com.example.assembleiavotacao.services.PautaService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -16,6 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.Optional;
 
+@Api(tags = {"Pauta"})
 @Slf4j
 @RequiredArgsConstructor
 @RestController
@@ -25,6 +28,7 @@ public class PautaController {
     private final PautaMapper pautaMapper;
     private final PautaService pautaService;
 
+    @ApiOperation(value = "Consultar pauta", notes = "Consultar as informacoes da pauta por ID")
     @GetMapping(value = "/{codigoPauta}", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<PautaDTO> findById(@PathVariable Long codigoPauta){
         log.debug("into findById method");
@@ -35,6 +39,7 @@ public class PautaController {
         return ResponseEntity.ok(pautaMapper.toDto(pauta));
     }
 
+    @ApiOperation(value = "Cadastrar pauta", notes = "Cadastrar uma nova pauta")
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<PautaDTO> insert(@Validated @RequestBody PautaDTO pautaDto){
         log.debug("into insert method");
@@ -48,6 +53,7 @@ public class PautaController {
         return ResponseEntity.created(uri).body(pautaMapper.toDto(pauta));
     }
 
+    @ApiOperation(value = "Abrir sessao da pauta", notes = "Abrir a sessao da pauta para iniciarem as votacoes")
     @PutMapping(value = "/{codigoPauta}/abrir-sessao", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<PautaDTO> abrirSessao(@PathVariable Long codigoPauta,
                                                 @RequestParam(value = "tempoDuracaoEmMinutos", required = false) Long tempoDuracaoEmMinutos){
