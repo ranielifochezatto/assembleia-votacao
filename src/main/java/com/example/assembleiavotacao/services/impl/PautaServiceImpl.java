@@ -44,6 +44,10 @@ public class PautaServiceImpl implements PautaService {
             throw new BusinessException(messages.get("pauta.sessao-desta-pauta-ja-foi-aberta"));
         }
 
+        if(tempoDuracaoEmMinutos == null){
+            tempoDuracaoEmMinutos = 1L;
+        }
+
         LocalDateTime dataAbertura = LocalDateTime.now();
         pauta.setDataAbertura(dataAbertura);
         pauta.setDataEncerramento(dataAbertura.plusMinutes(tempoDuracaoEmMinutos));

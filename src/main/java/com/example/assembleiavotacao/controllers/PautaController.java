@@ -50,7 +50,7 @@ public class PautaController {
 
     @PutMapping(value = "/{codigoPauta}/abrir-sessao", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<PautaDTO> abrirSessao(@PathVariable Long codigoPauta,
-                                                 @RequestParam(value = "tempoDuracaoEmMinutos", required = false, defaultValue = "1") Long tempoDuracaoEmMinutos){
+                                                @RequestParam(value = "tempoDuracaoEmMinutos", required = false) Long tempoDuracaoEmMinutos){
         log.debug("into abrirSessao method");
 
         Optional<Pauta> optionalPauta = pautaService.findById(codigoPauta);
