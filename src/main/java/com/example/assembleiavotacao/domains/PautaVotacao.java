@@ -6,16 +6,18 @@ import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(schema = "PUBLIC", name = "PAUTA_VOTACAO")
-public class PautaVotacao {
+public class PautaVotacao implements Serializable {
 
     @EqualsAndHashCode.Include
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CD_PAUTA_VOTACAO", nullable = false, unique = true, length = 9, updatable = false)
     private Long id;
 
