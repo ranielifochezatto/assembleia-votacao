@@ -1,10 +1,12 @@
 package com.example.assembleiavotacao.services.impl;
 
+import com.example.assembleiavotacao.clients.userinfo.dtos.StatusVote;
 import com.example.assembleiavotacao.components.Messages;
 import com.example.assembleiavotacao.domains.PautaVotacao;
 import com.example.assembleiavotacao.exceptions.BusinessException;
 import com.example.assembleiavotacao.repositories.PautaVotacaoRepository;
 import com.example.assembleiavotacao.services.PautaVotacaoService;
+import com.example.assembleiavotacao.services.UserInfoApiService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,7 @@ public class PautaVotacaoServiceImpl implements PautaVotacaoService {
 
     private final Messages messages;
     private final PautaVotacaoRepository repository;
+    private final UserInfoApiService userInfoApiService;
 
     @Override
     public Optional<PautaVotacao> findById(Long id) {
@@ -45,7 +48,22 @@ public class PautaVotacaoServiceImpl implements PautaVotacaoService {
             throw new BusinessException(messages.get("pauta-votacao.associado-ja-votou-nessa-pauta"));
         }
 
+        //verificar se o associado esta habilitado para a votacao
+        this.verificarAssociadoPodeVotar(pautaVotacao.getNumeroCpfAssociado());
+
         return repository.save(pautaVotacao);
+    }
+
+    private void verificarAssociadoPodeVotar(String numeroCpf){
+        log.debug("into verificarAssociadoPodeVotar method");
+        StatusVote statusVote = userInfoApiService.verifyCpf(numeroCpf);
+
+        if(statusVote == null){//cpf invalido
+            throw new BusinessException(messages.get("pauta-votacao.cpf-invalido"));
+        }
+        if(!StatusVote.ABLE_TO_VOTE.equals(statusVote)){
+            throw new BusinessException(messages.get("pauta-votacao.cpf-nao-habilitado-para-votar"));
+        }
     }
 
     @Override

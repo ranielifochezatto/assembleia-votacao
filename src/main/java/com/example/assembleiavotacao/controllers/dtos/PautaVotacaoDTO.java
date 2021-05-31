@@ -1,6 +1,6 @@
 package com.example.assembleiavotacao.controllers.dtos;
 
-import com.example.assembleiavotacao.enumeration.EnumVoto;
+import com.example.assembleiavotacao.enumerations.EnumVoto;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

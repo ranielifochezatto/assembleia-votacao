@@ -2,7 +2,7 @@ package com.example.assembleiavotacao.controllers.mappers;
 
 import com.example.assembleiavotacao.controllers.dtos.PautaVotacaoDTO;
 import com.example.assembleiavotacao.domains.PautaVotacao;
-import com.example.assembleiavotacao.enumeration.EnumVoto;
+import com.example.assembleiavotacao.enumerations.EnumVoto;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
